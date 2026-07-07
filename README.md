@@ -1,12 +1,18 @@
 # Epic of Kings
 
-An educational website dedicated to the Shahnameh.
+Hi, I'm Jack. I built Epic of Kings, an educational website dedicated to the Shahnameh, the Epic of Persian Kings, starting when I was 8. I created this site because I love the Shahnameh and wanted other kids to discover it too.
 
-Created by Jack, starting at age 8.
-
-Live site: epicofkings.com (coming soon)
+Live site: [epicofkings.com](https://epicofkings.com/)
+Substack: [epicofkings.substack.com](https://epicofkings.substack.com/)
 
 ## About
-Epic of Kings explores the world of the Shahnameh through historical facts about Ancient Persia, an encyclopedia of Shahnameh characters, a hall of Persian words related to the Shahnameh, interactive Shahnameh-themed games and challenges, including math olympiad problems based on Persian history, and more.
 
-The site is accompanied by the Epic of Kings Journal, where Jack explores the Shahnameh, Persian history, broader mythology, and related books and themes.
+Epic of Kings explores the world of the Shahnameh through:
+* Historical facts about Ancient Persia
+* Audio readings of famous Shahnameh passages
+* An encyclopedia of Shahnameh heroes, kings, villains, and creatures
+* A hall of Persian words drawn from the Shahnameh with definitions and pronunciations
+* Interactive, Shahnameh-themed games and challenges, including math olympiad problems
+* An interactive map, timeline, and more
+
+The site is accompanied by the [Epic of Kings Substack](https://epicofkings.substack.com/), where I explore the Shahnameh, Persian history, broader mythology, and related books and themes.
