@@ -5501,4 +5501,257 @@ br.br-land{display:none;}br.br-mobv{display:none;}@media (max-width:680px) and (
 .adv-continue{justify-content:center;}
 .adv-btn-continue{width:auto!important;text-align:center!important;padding:.72rem 1.8rem!important;background:var(--navy)!important;color:var(--gold-light)!important;border:1.5px solid var(--gold)!important;font-weight:700;letter-spacing:.01em;}
 </style>
-<script>function toggleMobileNav(){document.querySelector("nav").classList.toggle("nav-open");}document.addEventListener("click",function(e){var n=document.querySelector("nav");if(!n||!n.classList.contains("nav-open"))return;var a=e.target.closest(".nav-links a");if(a && !(a.parentElement && a.parentElement.classList.contains("nav-dropdown") && a.parentElement.querySelector(".dropdown-menu"))){n.classList.remove("nav-open");}});</script></body></html>
+<script>function toggleMobileNav(){document.querySelector("nav").classList.toggle("nav-open");}document.addEventListener("click",function(e){var n=document.querySelector("nav");if(!n||!n.classList.contains("nav-open"))return;var a=e.target.closest(".nav-links a");if(a && !(a.parentElement && a.parentElement.classList.contains("nav-dropdown") && a.parentElement.querySelector(".dropdown-menu"))){n.classList.remove("nav-open");}});</script><style id="mobile-polish-2026-08">
+/* =========================================================================
+   MOBILE POLISH PASS (2026-08). Appended last so it wins on source order.
+   EVERY rule below is inside a mobile-only media query. Desktop is never
+   matched: the portrait block caps at 680px wide, and the landscape block
+   requires a viewport under 1000px wide AND under 600px tall.
+   ========================================================================= */
+
+/* ---------- 1. PHONE PORTRAIT ---------- */
+@media (max-width: 680px) {
+
+  /* 1a. Readable base type. 16px also stops iOS Safari zooming on focus. */
+  body { font-size: 16px; }
+  input, select, textarea, .builder-input, .math-answer-input,
+  #enc-search, #word-search, #wd-input { font-size: 16px !important; }
+
+  /* 1b. Header hierarchy. Was 16.8px against 15px body text, so section
+     titles read as body copy. 22px restores a clear step down from the
+     hero without forcing the longest titles onto three lines. */
+  .section-title { font-size: 22px !important; line-height: 1.22 !important;
+                   letter-spacing: .04em !important; margin-bottom: .5rem !important;
+                   text-wrap: balance; }
+  .section-sub   { font-size: 14px !important; line-height: 1.5 !important;
+                   margin-top: .1rem !important; text-wrap: pretty; }
+  /* Two sections carry an id-level override, so they need matching specificity. */
+  #section-adventure .section-sub, #section-wordle .section-sub {
+    font-size: 14px !important; line-height: 1.5 !important; }
+
+  /* 1c. Text wrapping. Long transliterations (Zabulistan, Esfandiyar,
+     Mazandaran) were the main source of ragged and overflowing lines. */
+  p, li, .card-text, .section-sub, .enc-card-text, .tree-card-text {
+    overflow-wrap: break-word; word-break: normal; hyphens: auto;
+  }
+  h1, h2, h3, .card-title, .enc-card-title { overflow-wrap: break-word; hyphens: none; }
+
+  /* 1d. Touch targets. Apple and Google both specify ~44px minimum;
+     these controls were rendering between 27px and 40px tall. */
+  .btn, .game-btn, .diff-btn, .enc-filter-btn, .newgame-btn,
+  .math-skip-btn, .math-hint-btn, .card-badge, .rb-key, .map-panel-close {
+    min-height: 44px !important;
+    display: inline-flex !important; align-items: center !important;
+    justify-content: center !important;
+  }
+  .diff-btn { padding: .5rem 1rem !important; }
+  .rb-key   { min-width: 30px !important; }
+  .map-panel-close { min-width: 44px !important; }
+  input, .builder-input, .math-answer-input, #enc-search, #word-search {
+    min-height: 44px !important; box-sizing: border-box;
+  }
+
+  /* 1e. Overflow. These three rows exceeded the 390px viewport and were
+     being silently clipped by body{overflow-x:hidden}. */
+  /* Three CTAs no longer fit on one line, so stack them cleanly at a shared
+     width rather than letting them wrap to ragged widths. */
+  .hero-cta { flex-direction: column !important; align-items: center !important;
+              gap: .6rem !important; }
+  .hero-cta .btn { width: min(100%, 280px) !important; }
+
+  /* These search fields were running edge to edge with no gutter. */
+  #enc-search, #word-search { max-width: calc(100% - 24px) !important;
+    margin-left: auto !important; margin-right: auto !important; }
+  #tree-btn-dynasty, #tree-btn-sam, #tree-btn-women {
+    font-size: .95rem !important; padding-left: .7rem !important; padding-right: .7rem !important;
+  }
+  #section-tree div:has(> #tree-btn-dynasty) { max-width: 100% !important; }
+  /* Each story row is a nowrap flex of number / English title / Persian title /
+     play arrow. On the longest titles the Persian span (flex:0 0 auto) pushed
+     the arrow past the edge, where story-collection's overflow:hidden clipped
+     it: story 3 had no visible play button at all. Let the titles stack. */
+  .story-item, .story-clip { min-width: 0; max-width: 100%; }
+  .story-clip { flex-wrap: wrap !important; row-gap: 2px !important;
+                align-items: center !important; }
+  .story-clip-label { flex: 1 1 auto !important; min-width: 0; }
+  /* Basis leaves just enough room for the arrow, so the Persian title and the
+     play arrow share the second line instead of taking one each. */
+  .story-clip-fa { flex: 1 1 calc(100% - 40px) !important; min-width: 0;
+                   text-align: right; }
+  .story-play { flex: 0 0 auto !important; margin-left: auto !important; }
+
+  /* The homepage tagline carried white-space:nowrap. At 370px inside a 326px
+     column it ran off the right edge and forced the whole page to scroll
+     sideways (402px against a 390px viewport). Let it wrap. */
+  #section-home > p { white-space: normal !important; text-wrap: balance; }
+
+  /* The Persian couplet is set nowrap so a bayt stays on one line. Scale it
+     to the viewport so it fits rather than running under the edge. */
+  .quote-fa { font-size: min(1.05rem, 4.3vw) !important; }
+
+  /* Remaining sub-44px tap targets. */
+  .timeline-event, .timeline-slot, .adv-btn { min-height: 44px !important; }
+  .cpill { min-height: 34px !important; display: flex !important;
+           align-items: center !important; padding: .35rem .6rem !important; }
+
+
+  /* Audio buttons carry no class, so they need a structural selector: the
+     "Hear Jack" control on every encyclopedia card was 25px tall. */
+  .enc-banner button, .map-audio-btn, .answer-btn, .nav-burger {
+    min-height: 44px !important; display: inline-flex !important;
+    align-items: center !important; justify-content: center !important;
+  }
+  .nav-burger { min-width: 44px !important; }
+
+  /* 1f. Consistent section rhythm. Two sections ended flush at 0px while
+     the other eighteen ended at 32px. */
+  .section { padding-bottom: 32px !important; }
+  .section > *:first-child { margin-top: 0 !important; }
+}
+
+/* ---------- 2. PHONE LANDSCAPE ---------- */
+/* Requires a short AND narrow viewport, so no desktop or tablet matches. */
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 1000px) {
+
+  /* 2a. Nothing here was ever styled for landscape, because the existing
+     mobile rules are gated on (orientation:portrait). The page fell back
+     to desktop sizing on a 390px-tall screen. */
+  .section-title { font-size: 22px !important; line-height: 1.2 !important;
+                   margin-bottom: .35rem !important; text-wrap: balance; }
+  .section-sub   { font-size: 14px !important; line-height: 1.45 !important; }
+  #section-adventure .section-sub, #section-wordle .section-sub {
+    font-size: 14px !important; line-height: 1.45 !important; }
+  body { font-size: 16px; }
+
+  /* 2b. Reclaim vertical space. The nav was eating 16% of a 390px-tall screen,
+     and at 844px wide the five link labels wrapped onto a second line and
+     collided with the dropdown arrows. Reuse the burger the page already has. */
+  nav { height: 48px !important; flex-wrap: nowrap !important; }
+  .nav-mascot { height: 34px !important; width: auto !important; }
+  .nav-title  { font-size: 1rem !important; }
+  .nav-burger { display: block !important; }
+  nav .nav-links { display: none !important; }
+  nav.nav-open .nav-links {
+    display: block !important; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--navy); border-top: 2px solid var(--gold);
+    max-height: calc(100vh - 48px); overflow-y: auto; z-index: 200;
+  }
+  nav.nav-open .nav-links li { display: block; width: 100%; }
+  nav.nav-open .nav-links a { height: auto !important; padding: .5rem 1.2rem !important;
+                              font-size: .82rem !important; display: flex !important; }
+
+  /* The crest filled the whole 390px viewport, so the first screen was all logo.
+     Cap the crest itself; #hero-banner has overflow:hidden, so constraining the
+     banner would clip the buttons instead of shrinking the artwork. */
+  .hero-mascot-wrap { height: auto !important; }
+  .hero-mascot-wrap > svg { height: min(307px, 40vh) !important;
+                            width: auto !important; aspect-ratio: 1 / 1; }
+  /* The crest carries a -5.6px bottom margin tuned for its full size; at the
+     reduced landscape size the shield point collided with the tagline. */
+  .hero-mascot-wrap { margin-bottom: .5rem !important; }
+
+  .section { padding-top: 14px !important; padding-bottom: 20px !important; }
+
+  /* The section header band ran 236px tall, 61% of a 390px landscape screen,
+     so every section opened on its own banner with no content in view. */
+  .section-header { padding-top: 16px !important; padding-bottom: 16px !important; }
+  .section-header img { max-height: 86px !important; width: auto !important; height: auto !important; }
+  /* Landscape has horizontal room to spare, so let the subtitle use it rather
+     than wrapping to three lines and pushing the band taller. */
+  .section-header .section-sub { max-width: none !important; }
+  /* The band floor is set by two inline fixed heights (176x166 art box and a
+     150px text box), not by the artwork, so those have to give too. The flex
+     parent already centres, so the compensating padding is no longer needed. */
+  .section-header > div { align-items: center !important; }
+  .section-header > div > div { height: auto !important; padding-top: 0 !important; }
+  .section-header .hdrbox-narrow { width: 110px !important; }
+
+  /* 2c. Same finger, same minimum target size. */
+  .btn, .game-btn, .diff-btn, .enc-filter-btn, .newgame-btn,
+  .math-skip-btn, .math-hint-btn, .card-badge, .rb-key, .map-panel-close {
+    min-height: 44px !important;
+    display: inline-flex !important; align-items: center !important;
+    justify-content: center !important;
+  }
+  .map-panel-close { min-width: 44px !important; }
+  input, .builder-input, .math-answer-input, #enc-search, #word-search {
+    min-height: 44px !important; font-size: 16px !important; box-sizing: border-box;
+  }
+
+
+  /* Audio buttons carry no class, so they need a structural selector: the
+     "Hear Jack" control on every encyclopedia card was 25px tall. */
+  .enc-banner button, .map-audio-btn, .answer-btn, .nav-burger {
+    min-height: 44px !important; display: inline-flex !important;
+    align-items: center !important; justify-content: center !important;
+  }
+  .nav-burger { min-width: 44px !important; }
+
+  /* 2d. Wrapping and overflow, as in portrait. */
+  .hero-cta { flex-wrap: wrap !important; }
+  p, li, .section-sub { overflow-wrap: break-word; hyphens: auto; }
+  h1, h2, h3, .card-title { overflow-wrap: break-word; }
+  #section-home > p { white-space: normal !important; text-wrap: balance; }
+
+  /* These paragraphs carry a desktop offset (position:relative; left:18px)
+     plus a 650px max-width, which pushed them past the right edge of a
+     667px landscape phone. Portrait already neutralised this; landscape did not. */
+  .overview-text { position: static !important; left: auto !important;
+                   width: auto !important; max-width: 100% !important; }
+  .quote-fa { font-size: min(1.5rem, 3.5vw) !important; }
+
+  .timeline-event, .timeline-slot, .adv-btn { min-height: 44px !important; }
+  .cpill { min-height: 34px !important; display: flex !important;
+           align-items: center !important; padding: .35rem .6rem !important; }
+}
+</style>
+<script id="mobile-polish-js-2026-08">
+/* Mobile-only behaviour. Every branch is width-gated, so desktop is untouched. */
+(function () {
+  var isPhone = function () { return window.innerWidth <= 680 ||
+    (window.matchMedia('(orientation:landscape)').matches && window.innerHeight <= 600 && window.innerWidth <= 1000); };
+
+  /* A. Word search cells were computed as a fixed px size multiplied by 0.75,
+     giving 26px / 21px / 18px cells on a phone. Size them from the space
+     actually available instead, floored at a usable target. */
+  if (typeof window.renderWSGrid === 'function') {
+    var _origRender = window.renderWSGrid;
+    window.renderWSGrid = function () {
+      _origRender.apply(this, arguments);
+      if (!isPhone()) return;
+      var grid = document.getElementById('ws-grid');
+      var n = (typeof wsSize !== 'undefined') ? wsSize : 0;
+      if (!grid || !n) return;
+      var avail = Math.min(window.innerWidth - 24, 520);
+      /* Fit the grid to the width available. A hard minimum would push the
+         18x18 board wider than the screen, and the grid uses touch-action:none
+         for drag-select, so a horizontally scrolling board becomes a trap. */
+      var cs = Math.max(16, Math.floor((avail - (n * 2)) / n));
+      grid.style.gridTemplateColumns = 'repeat(' + n + ',' + cs + 'px)';
+      grid.style.gridTemplateRows = 'repeat(' + n + ',' + cs + 'px)';
+      var fs = Math.max(0.62, Math.min(1.0, cs / 32)) + 'rem';
+      [].forEach.call(grid.children, function (c) {
+        c.style.width = cs + 'px'; c.style.height = cs + 'px'; c.style.fontSize = fs;
+      });
+    };
+  }
+
+  /* B. Nothing in the page listened for rotation, so grids and boards kept
+     the geometry they were built with until you left the section. */
+  var relayout = function () {
+    if (!isPhone()) return;
+    try { if (typeof window.renderWSGrid === 'function' && document.getElementById('ws-grid')) window.renderWSGrid(); } catch (e) {}
+    try { if (typeof window.pzBuild === 'function' && document.getElementById('pz-board')) window.pzBuild(); } catch (e) {}
+  };
+  /* Deliberately no synthetic resize dispatch here: the page's own card
+     equalisers listen for resize and are not idempotent, so firing one would
+     nudge desktop card heights. Relayout only what rotation actually breaks. */
+  window.addEventListener('orientationchange', function () { setTimeout(relayout, 250); });
+  var lastW = window.innerWidth;
+  window.addEventListener('resize', function () {
+    if (Math.abs(window.innerWidth - lastW) > 60) { lastW = window.innerWidth; setTimeout(relayout, 120); }
+  });
+})();
+</script>
+
+</body></html>
