@@ -5597,11 +5597,24 @@ br.br-land{display:none;}br.br-mobv{display:none;}@media (max-width:680px) and (
 
   /* Audio buttons carry no class, so they need a structural selector: the
      "Hear Jack" control on every encyclopedia card was 25px tall. */
-  .enc-banner button, .map-audio-btn, .answer-btn, .nav-burger {
+  .enc-banner button, .map-audio-btn, .answer-btn {
     min-height: 44px !important; display: inline-flex !important;
     align-items: center !important; justify-content: center !important;
   }
-  .nav-burger { min-width: 44px !important; }
+  /* The burger stays display:block: its bars rely on collapsing block margins,
+     and its open-state X animation (translateY ±7px) is tuned to that exact
+     geometry. Flex broke both (row bars closed, chevron open). Reach the 44px
+     target with padding instead, which changes nothing inside the button. */
+  .nav-burger { padding: 10px 11px !important; }
+
+
+  /* The find-these-words checklist rendered as a single column: 12-16 rows,
+     nearly a full screen of scrolling before the footer. Wrap the items into
+     a compact centred grid; the heading (:first-child) keeps its own line. */
+  #ws-wordlist { display: flex !important; flex-direction: row !important;
+                 flex-wrap: wrap !important; justify-content: center !important;
+                 gap: .1rem .9rem !important; }
+  #ws-wordlist > div:first-child { flex: 1 1 100% !important; }
 
   /* 1f. Consistent section rhythm. Two sections ended flush at 0px while
      the other eighteen ended at 32px. */
@@ -5681,11 +5694,24 @@ br.br-land{display:none;}br.br-mobv{display:none;}@media (max-width:680px) and (
 
   /* Audio buttons carry no class, so they need a structural selector: the
      "Hear Jack" control on every encyclopedia card was 25px tall. */
-  .enc-banner button, .map-audio-btn, .answer-btn, .nav-burger {
+  .enc-banner button, .map-audio-btn, .answer-btn {
     min-height: 44px !important; display: inline-flex !important;
     align-items: center !important; justify-content: center !important;
   }
-  .nav-burger { min-width: 44px !important; }
+  /* The burger stays display:block: its bars rely on collapsing block margins,
+     and its open-state X animation (translateY ±7px) is tuned to that exact
+     geometry. Flex broke both (row bars closed, chevron open). Reach the 44px
+     target with padding instead, which changes nothing inside the button. */
+  .nav-burger { padding: 10px 11px !important; }
+
+
+  /* The find-these-words checklist rendered as a single column: 12-16 rows,
+     nearly a full screen of scrolling before the footer. Wrap the items into
+     a compact centred grid; the heading (:first-child) keeps its own line. */
+  #ws-wordlist { display: flex !important; flex-direction: row !important;
+                 flex-wrap: wrap !important; justify-content: center !important;
+                 gap: .1rem .9rem !important; }
+  #ws-wordlist > div:first-child { flex: 1 1 100% !important; }
 
   /* 2d. Wrapping and overflow, as in portrait. */
   .hero-cta { flex-wrap: wrap !important; }
@@ -5746,6 +5772,30 @@ br.br-land{display:none;}br.br-mobv{display:none;}@media (max-width:680px) and (
   /* Deliberately no synthetic resize dispatch here: the page's own card
      equalisers listen for resize and are not idempotent, so firing one would
      nudge desktop card heights. Relayout only what rotation actually breaks. */
+  /* C. The family tree SVG (~630px) sits in a horizontal-scroll container that
+     opened at scrollLeft 0, showing a mostly blank left margin with the node
+     column clipped at the right edge. Centre it after each render on phones. */
+  if (typeof window.showTree === 'function') {
+    var _origShowTree = window.showTree;
+    window.showTree = function () {
+      var r = _origShowTree.apply(this, arguments);
+      if (isPhone()) setTimeout(function () {
+        var svg = document.getElementById('tree-svg');
+        var c = svg && svg.parentElement;
+        if (c && c.scrollWidth > c.clientWidth) c.scrollLeft = (c.scrollWidth - c.clientWidth) / 2;
+      }, 120);
+      return r;
+    };
+  }
+  var centerTreeIfPhone = function () {
+    if (!isPhone()) return;
+    var svg = document.getElementById('tree-svg');
+    var c = svg && svg.parentElement;
+    if (c && c.scrollWidth > c.clientWidth && c.scrollLeft === 0)
+      c.scrollLeft = (c.scrollWidth - c.clientWidth) / 2;
+  };
+  setTimeout(centerTreeIfPhone, 600);
+
   window.addEventListener('orientationchange', function () { setTimeout(relayout, 250); });
   var lastW = window.innerWidth;
   window.addEventListener('resize', function () {
